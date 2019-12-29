@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<title>ADANIAN CONNECT</title>
+</head>
+<body>
+
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: #343a40;">
+        <div class="container">
+          <a class="navbar-brand mr-5" href="/home">ADANIAN CONNECT</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="/profile">Profile</a>
+                <a class="nav-item nav-link" href="/logout">Logout</a>
+                  <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Settings
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/friends">Book Mark Profiles</a>
+          <a class="dropdown-item" href="/editu">Edit Details</a>
+          <a class="dropdown-item" href="/edit">Edit My Profile</a>
+          <a class="dropdown-item" href="/show-messages">SHOW MESSAGES</a>
+            <a class="dropdown-item" href="/delete" onclick="return confirm('Are you sure?')">Delete Account</a>
+          <div class="dropdown-divider"></div>
+        </div>
+      </li>
+              {% else %}
+                <a class="nav-item nav-link" href="login">Login</a>
+                <a class="nav-item nav-link" href="">Register</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+
+
+
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.first_name }} {{ user.last_name }} </h2>
+          <p class="text-secondary">{{ user.email }}</p>
+                    <p class="text-secondary">username : {{user.username }}</p>
+          <p class="text-secondary" style="top: 20px;position: relative;">{{user.profile.total_likes}}  people have bookmark your profile</p>
+        </div>
+      </div>
+      <hr>
+
+
+
+            <!-- Categories Widget -->
+            <label style="font-weight: bold;">Technology Known: </label>
+        <div id="result" style="color: black;font-size: 30px;"></div>
+
+<hr>
+
+      <div class="media">
+        <div class="media-body">
+          <label style="font-weight: bold;">linkedin profile : </label>
+          <a href="{{ user.profile.linkin }}" style="font-size: 30px;" target="blank">{{ user.profile.linkin }}</a>
+
+        </div>
+      </div>
+
+<hr>
+
+
+          <label style="font-weight: bold;">Languages Known: </label>
+         <div id="result1" style="color: black;font-size: 30px;"></div>
+
+      <hr>
+
+      <div class="media">
+        <div class="media-body">
+          <label style="font-weight: bold;">Github profile : </label>
+          <a href="{{ user.profile.link }}" style="font-size: 30px;" target="blank">{{ user.profile.link }}</a>
+
+        </div>
+      </div>
+
+
+    <hr>
+
+
+  <div class="media">
+        <div class="media-body">
+          <label style="font-weight: bold;">StopStalk profile : </label>
+          <a href="{{ user.profile.stop }}" style="font-size: 30px;" target="blank">{{ user.profile.stop }}</a>
+
+        </div>
+      </div>
+<hr>
+
+
+
+      <div class="media">
+        <div class="media-body">
+          <label style="font-weight: bold;">Semester : </label>
+          <h2 class="account-heading">{{ user.profile.sem }}</h2>
+
+        </div>
+      </div>
+
+
+
+    </div>
+        </div>
+        <div class="col-md-4">
+          <div class="content-section">
+            <h3>EXTRA SKILLS</h3>
+            <p class='text-muted'>{{user.profile.skills}}</p>
+          </div>
+        </div>
+      </div>
+
+
+    </main>
+
+
+<script type="text/javascript">
+
+$(function(){
+ // let notesElm = document.getElementById("kl");
+ //console.log("{{profiles.tech|safe}}")
+$.each(eval("{{user.profile.tech|safe}}"), function(index,value ) {
+//console.log(value)
+$("#result").append(value + '<br>');
+});
+});
+
+
+
+$(function(){
+  //let notesElm = document.getElementById("kl");
+  //console.log("{{profiles.lang|safe}}")
+$.each(eval("{{user.profile.lang|safe}}"), function(index,value ) {
+//console.log(value)
+$("#result1").append(value + '<br>');
+});
+});
+
+</script>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

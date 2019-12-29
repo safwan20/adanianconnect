@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<title>ADANIAN CONNECT</title>
+</head>
+<body>
+
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: #343a40;">
+        <div class="container">
+          <a class="navbar-brand mr-5" href="/home">ADANIAN CONNECT</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="/profile">Profile</a>
+                <a class="nav-item nav-link" href="/logout">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="login">Login</a>
+                <a class="nav-item nav-link" href="">Register</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
+
+
+        <div class="content-section">
+
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ profiles.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ profiles.user.first_name }} {{ profiles.user.last_name }}</h2>
+          <p class="text-secondary">Contact : {{ profiles.user.email }}</p>
+          <p class="text-secondary">username : {{ profiles.user.username }}</p>
+          <p class="text-secondary">{{total_likes}} people have bookmark his profile</p>
+        </div>
+      </div>
+
+
+
+
+
+
+{% ifnotequal profiles.user.username|stringformat:"s" request.user.username %}
+<form action="/like" method="POST" style="display: inline-block;">
+	{% csrf_token %}
+	{% if is_liked %}
+	<button class="btn btn-block btn-primary" style="width: 100px;" name="kop" value="{{profiles.id}}"><i class="fa fa-thumbs-up">UnMarked</i> </button>
+	{% else %}
+	<button class="btn btn-block btn-primary" style="width: 100px;" name="kop" value="{{profiles.id}}"><i class="fa fa-thumbs-up">Mark</i> </button>
+	{% endif %}
+</form>
+{% endifnotequal %}
+
+
+{% ifnotequal profiles.user.username|stringformat:"s" request.user.username %}
+<a href="/message-box/{{profiles.id}}"><button class="btn btn-primary"  style="margin-left: 40px;">Message</button></a>
+{% endifnotequal %}
+
+<hr>
+
+        <label style="font-weight: bold;">Technology Known: </label>
+        <div id="result" style="color: black;font-size: 30px;"></div>
+
+<hr>
+
+
+         <label style="font-weight: bold;">Languages Known: </label>
+         <div id="result1" style="color: black;font-size: 30px;"></div>
+
+<hr>
+
+
+       <div class="media">
+        <div class="media-body">
+          <label style="font-weight: bold;">linkedin profile : </label>
+          <a href="{{ user.profile.linkin }}" style="font-size: 30px;" >{{profiles.linkin }}</a>
+      </div>
+      </div>
+
+<hr>
+
+      <div class="media">
+        <div class="media-body">
+          <label style="font-weight: bold;">Sem : </label>
+          <h2 class="account-heading">{{ profiles.sem }}</h2>
+        </div>
+      </div>
+
+<hr>
+
+     <div class="media">
+        <div class="media-body">
+          <label style="font-weight: bold;">Github profile : </label>
+          <a href="{{ user.profile.link }}" style="font-size: 30px;" >{{ profiles.link }}</a>
+        </div>
+      </div>
+
+<hr>
+
+   <div class="media">
+        <div class="media-body">
+          <label style="font-weight: bold;">StopStalk profile : </label>
+          <a href="{{ user.profile.stop }}" style="font-size: 30px;" >{{ profiles.stop }}</a>
+
+        </div>
+      </div>
+<hr>
+
+
+</div>
+        </div>
+        <div class="col-md-4">
+          <div class="content-section">
+            <h3>EXTRA SKILLS</h3>
+            <p class='text-muted'>{{profiles.skills}}</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+
+
+<script type="text/javascript">
+  console.log(request.user);
+</script>
+
+
+<script type="text/javascript">
+
+$(function(){
+ // let notesElm = document.getElementById("kl");
+ //console.log("{{profiles.tech|safe}}")
+$.each(eval("{{profiles.tech|safe}}"), function(index,value ) {
+//console.log(value)
+$("#result").append(value + '<br>');
+});
+});
+
+
+
+$(function(){
+  //let notesElm = document.getElementById("kl");
+  //console.log("{{profiles.lang|safe}}")
+$.each(eval("{{profiles.lang|safe}}"), function(index,value ) {
+//console.log(value)
+$("#result1").append(value + '<br>');
+});
+});
+
+</script>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

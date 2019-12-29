@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load static %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>ADANIAN CONNECT</title>
+</head>
+<body>
+
+<!-- Image and text -->
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="/home">
+    ADANIAN CONNECT
+  </a>
+</nav>
+
+
+{% load crispy_forms_tags %}
+
+<form method="POST" style="width: 500px;height: 300px;margin: 0 auto;"  enctype="multipart/form-data">
+
+{% csrf_token %}
+
+
+{{p_form|crispy}}
+
+
+<button class="btn btn-primary">EDIT</button>
+
+
+</form>
+
+
+</body>
+</html>

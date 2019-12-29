@@ -1,0 +1,271 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!--     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"> -->
+      <link rel="stylesheet" type="text/css" href="{% static 'hello.css' %}">
+       <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      <link rel="stylesheet" href="/resources/demos/style.css">
+<style type="text/css">
+  .ok{
+    margin-left: 400px;
+  }
+  @media(max-width: 900px)
+  {
+  .ok{
+    margin-left: 100px;
+
+  }
+}
+.tak{
+  width: 200px !important;
+  margin-left: 10px;
+}
+.btn-primary{
+  margin-left: 10px;
+}
+#knee{
+  margin-top: 10px;
+}
+</style>
+
+
+<title>ADANI</title>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/home">Adanian connect</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+                {% if user.is_authenticated %}
+             <li class="nav-item">
+              <a class="nav-link" href="/profile">Profile</a>
+             </li>
+               <li class="nav-item">
+               <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                  <li class="nav-item">
+               <a class="nav-link" href="/stats">Stats</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+              <a class="nav-link" href="login">Login</a>
+             </li>
+               <li class="nav-item">
+               <a class="nav-link" href="">Register</a>
+                </li>
+              {% endif %}
+
+    </ul>
+
+       <form class="form-inline my-2 my-lg-0">
+      <input type="text" class="form-control f" placeholder="name of the adanian" name="name" id="tags">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+{% if size != 0 and jp == 2 %}
+<div class="alert alert-primary" role="alert">
+  you have {{size}} message{{size | pluralize }}
+</div>
+{% endif %}
+
+
+
+
+
+
+
+
+<div id="knee">
+<form class="form-inline ok">
+        <div>
+            <select class="custom-select tak" id="inputGroupSelect01" name="sem">
+            <option value="Semester">Semester</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+            <option value="5">Five</option>
+            <option value="6">Six</option>
+            <option value="7">Seven</option>
+            <option value="8">Eight</option>
+            </select>
+          </div>
+
+       <div>
+            <select class="custom-select tak" id="inputGroupSelect01" name="tech">
+              <option value="Technology">Technology</option>
+              <option value="SOFTWARE DEVELOPMENT">SOFTWARE</option>
+              <option value="WEB DEVELOPMENT">WEB DEVELOPMENT</option>
+              <option value="MOBILE APP DEVELOPMENT">MOBILE APP DEVELOPMENT</option>
+              <option value="COMPETETIVE PROGRAMMING">COMPETETIVE PROGRAMMING</option>
+              <option value="GAME DEVELOPMENT">GAME DEVELOPMENT</option>
+              <option value="FRONT END DEVELOPMENT">FRONT END DEVELOPMENT</option>
+              <option value="ROBOTICS">ROBOTICS</option>
+              <option value="ARTIFICIAL INTELLIGENT">ARTIFICIAL INTELLIGENT</option>
+              <option value="DEEP LEARNING">DEEP LEARNING</option>
+              <option value="MACHINE LEARNING">MACHINE LEARNING</option>
+              <option value="BACK END DEVELOPMENT">BACK END DEVELOPMENT</option>
+              <option value="UI">UI UX DESIGNING</option>
+              <option value="GRAPHIC DESIGNING">GRAPHIC DESIGNING</option>
+              <option value="CLOUD TECHNOLOGY">CLOUD TECHNOLOGY</option>
+              <option value="DATABASE MANAGEMENT">DATABASE MANAGEMENT</option>
+              <option value="IOT">IOT</option>
+              <option value="NETWORKING">NETWORKING</option>
+            </select>
+          </div>
+
+      <div>
+            <select class="custom-select tak" id="inputGroupSelect01" name="lang">
+              <option value="Language">Language</option>
+
+              <option value="C++">C++</option>
+              <option value="Java">JAVA</option>
+              <option value="Python">Python</option>
+              <option value="C#">C#</option>
+              <option value="C">C</option>
+              <option value="Andriod">Andriod</option>
+
+
+              <option value="Flutter">Flutter</option>
+              <option value="Django">Django</option>
+              <option value="Flask">Flask</option>
+              <option value="Java Script">Java Script</option>
+              <option value="Jquery">Jquery</option>
+              <option value="Html">Html</option>
+
+
+              <option value="R">R</option>
+              <option value="Kotlin">Kotlin</option>
+              <option value="Css">Css</option>
+              <option value="Golang">Golang</option>
+              <option value="Pygame">Pygame</option>
+              <option value="Ruby">Ruby</option>
+
+              <option value="Objective C">Objective C</option>
+              <option value="Php">Php</option>
+              <option value="Swift">Swift</option>
+              <option value="Mysql">Mysql</option>
+              <option value="Sql">Sql</option>
+              <option value="Perl">Perl</option>
+
+              <option value="Lua">Lua</option>
+              <option value="Erlang">Erlang</option>
+              <option value="MATLAB">MATLAB</option>
+              <option value="React Native">React Native</option>
+              <option value="Linux">Linux</option>
+            </select>
+          </div>
+
+          <div>
+             <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+
+
+
+</form>
+
+
+</div>
+
+
+
+
+
+
+<div class="row g">
+{% for i in profiles %}
+
+  <div class="col">
+        <div class="card">
+          <img src="{{ i.image.url }}" class="card-img-top profile-img" alt="..." height="230px">
+          <div class="card-body">
+            <h5 class="card-title">{{ i.user.first_name }} {{ i.user.last_name }}</h5>
+            <a href="show/{{i.id}}" class="btn btn-primary">Profile</a>
+          </div>
+        </div>
+      </div>
+
+
+{% endfor %}
+</div>
+
+
+{% if jp == 1 %}
+<nav aria-label="Page navigation example" style="width: 500px;margin: 0 auto;margin-top: 40px;margin-bottom: 20px;">
+  <ul class="pagination">
+    {% if profiles.has_previous %}
+     <li class="page-item"><a class="page-link" href="{{ request.get_full_path }}&page=1">First</a></li>
+    <li class="page-item"><a class="page-link" href="{{ request.get_full_path }}&page={{ profiles.previous_page_number }}">Previous</a></li>
+    {% endif %}
+    {% if profiles.has_next %}
+    <li class="page-item"><a class="page-link" href="{{ request.get_full_path }}&page={{ profiles.next_page_number }}">Next</a></li>
+    <li class="page-item"><a class="page-link" href="{{ request.get_full_path }}&page={{ profiles.paginator.num_pages }}">Last</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+
+{% else %}
+<nav aria-label="Page navigation example" style="width: 500px;margin: 0 auto;margin-top: 40px;margin-bottom: 20px;">
+  <ul class="pagination">
+    {% if profiles.has_previous %}
+     <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ profiles.previous_page_number }}">Previous</a></li>
+    {% endif %}
+    {% if profiles.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ profiles.paginator.num_pages }}">Last</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ profiles.next_page_number }}">Next</a></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+     <script>
+      var list = {{n|safe}};
+  $( function() {
+    var availableTags = list;
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
+
+</body>
+</html>
